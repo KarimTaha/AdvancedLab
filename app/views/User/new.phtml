@@ -1,0 +1,145 @@
+<script>
+	$(document).ready(function() {
+
+		$('#password').keyup(function(){
+			$('#result').html(checkStrength($('#password').val()))
+		})
+
+		function checkStrength(password) {
+			var strength = 0
+
+			if (password.length == 0) {
+				$('#result').removeClass()
+				$('#result').empty()
+				return
+			}
+
+			if (password.length < 6) {
+				$('#result').removeClass()
+				$('#result').addClass('short label-danger label')
+				return 'Too short'
+			}
+
+			if (password.length > 7) {
+				strength += 1
+			}
+
+			if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)){
+				strength += 1
+			}
+
+			if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)){
+				strength += 1
+			}
+			if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)){
+				strength += 1
+			}
+
+			if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,",%,&,@,#,$,^,*,?,_,~])/)){
+				strength += 1
+			}
+
+			if (strength < 2 ) {
+				$('#result').removeClass()
+				$('#result').addClass('weak label label-warning')
+				return 'Weak'
+			} else if (strength == 2 ) {
+				$('#result').removeClass()
+				$('#result').addClass('good label label-primary')
+				return 'Good'
+			} else {
+				$('#result').removeClass()
+				$('#result').addClass('strong label label-success')
+				return 'Strong'
+			}
+		}
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		$('#repeat').keyup(function(){
+			$('#confirm').html(checkMatch($('#repeat').val()))
+		})
+		
+	});
+	function checkMatch(repeat) {
+		if (repeat.length == 0) {
+			$('#confirm').removeClass()
+			$('#confirm').empty()
+			return
+		}
+
+		var password = $('#password').val()
+		if (repeat === password) {
+			$('#confirm').empty()
+			$('#confirm').removeClass()
+			$('#confirm').addClass('label label-success')
+			return 'Passwords match'
+		}
+		else {
+			$('#confirm').removeClass()
+			$('#confirm').addClass('label label-danger')
+			return 'Passwords do not match'
+		}
+	}
+</script>
+
+<style>
+	.register {
+		background-color: #eee;
+		width: 440px;
+		padding: 20px;
+		border-radius: 7px;
+	}
+	.form-control {
+		width: 300px;
+		border-radius: 5px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+</style>
+<br></br>
+<div class="container register">
+
+	<form action="create" method="post" enctype="multipart/form-data">
+
+		<div align="center">
+			<h1>Register</h1>
+			<div>
+				<label>First Name</label>
+				<input type="text" name="first_name" class="form-control">
+			</div>
+			<div>
+				<label>Last Name</label>
+				<input type="text" name="last_name" class="form-control">
+			</div>
+			<div>
+				<label>Username</label>
+				<input type="text" name="username" class="form-control">
+			</div>
+			<div>
+				<label>Email</label>
+				<input type="text" name="email" class="form-control">
+			</div>
+			<div class="image-form">
+				<label>Select your Avatar</label>
+				<input type="file" name="photo" id="fileToUpload">
+			</div>
+			<div>
+				<label>Password</label>
+				<input type="password" id="password" name="password" class="form-control">
+				<span id="result"></span>
+			</div>
+			<div>
+				<label>Repeat Password</label>
+				<input type="password" id="repeat" name="repeatPassword" class="form-control">
+				<span id="confirm"></span>
+			</div>
+			
+			<br>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+</div>

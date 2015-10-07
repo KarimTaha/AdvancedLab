@@ -1,0 +1,30 @@
+<style type="text/css">
+	.change-avatar {
+		background-color: #eee;
+		width: 250px;
+		padding: 20px;
+		border-radius: 7px;
+		margin: 30px;
+		height: 350px;
+	}
+	.old-avatar {
+		max-width: 90%;
+		max-width: 180px;
+	}
+</style>
+<div align="center">
+	<div class="change-avatar">
+		<h4>Your old avatar</h2>
+		<img src="<?php echo substr($user->avatar, strpos($user->avatar, "\one")); ?>" class="old-avatar">
+		<form action="saveAvatar" method="post" enctype="multipart/form-data">
+			<div>
+				<div class="image-form">
+					<label>Select image</label>
+					<input type="file" name="photo" id="fileToUpload">
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+	</div>
+</div>

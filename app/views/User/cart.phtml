@@ -1,0 +1,64 @@
+<style type="text/css">
+	.cart {
+		background-color: #eee;
+		width: 800px;
+		padding: 20px;
+		border-radius: 7px;
+		margin-top: 70px;
+	}
+	.item {
+		background-color: #eee;
+		width: 250px;
+		padding: 20px;
+		border-radius: 7px;
+		margin: 30px;
+		margin-left: 50px;
+		height: 300px;
+	}
+	.product_img{
+		max-width: 180px;
+		max-height: 160px;
+		border-radius: 5px;
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	h2{
+		color: white;
+	}
+</style>
+<?php if (strlen($user->cart)==0 or is_null($user->cart)) { ?>
+<div align="center">
+	<div class="cart">
+		<h3>Your cart is empty!</h3>
+	</div>
+</div>
+<?php }
+else {
+	?>
+	<div>
+		<h2 align="center">My Cart</h2>
+		<div class="row">
+			<?php 
+			foreach ($products as $product) { ?>
+			<div class="item col-md-3" align="center">
+				<?php
+				echo 'Name: '.$product->name;
+				echo '<br>';
+				echo 'Price: '. $product->price;
+				echo '<br>';
+				?>
+				<img src="<?php echo substr($product->img_url, strpos($product->img_url, "\one")); ?>" class="product_img">
+				<form action="removeItem" method="post">
+					<input type="number" name="product_id" hidden value="<?php echo $product->id; ?>" />
+					<button type="submit" class="btn btn-danger">Remove</button>
+				</form>
+			</div>
+			<?php
+		}
+		?>
+	</div>
+</div>
+<div align="center">
+	<a href="checkout" class="btn btn-success">Checkout</a>
+</div>
+<?php } ?>

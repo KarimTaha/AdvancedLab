@@ -1,0 +1,48 @@
+<style type="text/css">
+	.product{
+		background-color: #eee;
+		width: 230px;
+		padding: 20px;
+		border-radius: 10px;
+		margin: 40px;
+		margin-left: 60px;
+		height: 320px;
+	}
+	.product_img{
+		max-height: 140px;
+		max-width: 180px;
+		border-radius: 5px;
+		margin-top: 10px;
+	}
+</style>
+<div  align="center">
+	<?php foreach ($products as $product) {?>
+	<div class="col-md-3 product">
+		<?php echo '<strong>'.$product->name.'</strong>';
+		echo '<br>'; ?>
+		<img src="<?php echo substr($product->img_url, strpos($product->img_url, "\one")); ?>" class="product_img">
+		<br></br>
+		<?php 
+		echo '$'.$product->price;
+		echo '<br>';
+		echo $product->stock.' in stock';
+		echo '<br><br>';
+		?>
+		<?php if ($product->stock == 0) { ?>
+		<a class="btn btn-danger disabled">Sold out</a>
+		<?php }
+
+		else if ($this->session->get("auth")) { ?>
+		<form action="Product\invoice" method="post">
+			<input type="number" name="product_id" hidden value="<?php echo $product->id; ?>" />
+			<button type="submit" class="btn btn-primary">Buy</button>
+		</form>
+		<?php }
+		else { ?>
+		<a href="Session\index" class="btn btn-primary">Login to buy</a>
+		<?php } ?>
+		
+	</div>
+	<?php
+} ?>
+</div>

@@ -1,0 +1,33 @@
+<style type="text/css">
+	.invoice {
+		background-color: #eee;
+		width: 640px;
+		padding: 20px;
+		border-radius: 7px;
+	}
+	.product_img{
+		max-width: 600px;
+		border-radius: 5px;
+		margin-top: 10px;
+	}
+</style>
+<div align="center">
+	<div class="invoice">
+		<h3>Do you want to add this product to your cart?</h3>
+		<div>
+			<h4>
+			<?php echo 'Name: '. $product->name;
+			echo '<br><br>';
+			echo 'Price: $'.$product->price;
+			 ?>
+			 </h4>
+		</div>
+		<br>
+		<img src="<?php echo substr($product->img_url, strpos($product->img_url, "\one")); ?>" class="product_img">
+		<br></br>
+		<form action="confirm" method="post">
+			<input type="number" name="product_id" hidden value="<?php echo $product->id; ?>" />
+			<button type="submit" class="btn btn-success">Confirm</button>
+		</form>
+	</div>
+</div>

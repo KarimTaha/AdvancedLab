@@ -1,0 +1,71 @@
+<style type="text/css">
+	.avatar-background {
+		background-color: #eee;
+		width: 100%;
+		padding: 20px;
+		border-radius: 7px;
+		height: 190px;
+		margin-bottom: 30px;
+	}
+	.avatar-img {
+		max-width: 200px;
+		max-height: 140px;
+	}
+</style>
+
+<body>
+	<div class="container">
+		<br></br>
+		<div class="row">
+			<div class="col-sm-3" align="center">
+				<div class="avatar-background">
+					<img src="<?php echo substr($user->avatar, strpos($user->avatar, "\one")); ?>" class="avatar-img">
+				</div>
+			</div>
+
+			<div class="col-sm-9">  
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<p><?php echo $user->first_name; ?>'s history</p>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<?php 
+							foreach ($user_purchases as $purchase) { ?>
+							<li>
+							<?php
+								$products_ids = explode(", ", $purchase->products);
+								$products = array();
+								foreach ($products_ids as $id) {
+									array_push($products, Product::findFirst($id)->name);
+								}
+								echo $user->first_name . ' purchased ';
+								$names = implode(', ', $products);
+								echo '<strong>'.$names.'</strong>';
+
+								echo ' for a total of $'.$purchase->price.' at '.$purchase->time.'</li>';
+							}
+							?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<!--left col-->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						About me <a href="edit"><span class="glyphicon glyphicon-edit pull-right"></span></a>
+					</div>
+					<ul class="list-group">
+						<li class="list-group-item text-right"><span class="pull-left"><strong class="">Name</strong></span><?php echo $user->first_name . ' ' . $user->last_name; ?></li>
+						<li class="list-group-item text-right"><span class="pull-left"><strong class="">Username</strong></span><?php echo $user->username; ?></li>
+						<li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span><?php echo $user->created_at; ?></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<br></br>
+	</body>
+	</html>

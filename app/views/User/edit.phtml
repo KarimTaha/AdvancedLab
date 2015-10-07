@@ -1,0 +1,76 @@
+<style>
+	.edit {
+		background-color: #eee;
+		width: 640px;
+		padding: 20px;
+		border-radius: 7px;
+	}
+	.form-control {
+		width: 400px;
+	}
+</style>
+<br></br>
+<div class="container edit">
+
+	<form action="save" method="post">
+		<div align="center">
+			<h1>Edit your profile.</h1>
+			<table>
+				<tr>
+					<td align="left">
+						<label>First name</label>
+					</td>
+					<td align="left">
+						<input type="text" name="first_name" class="form-control" value="<?php echo $user->first_name; ?>">
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<label>Last name</label>
+					</td>
+					<td align="left">
+						<input type="text" name="last_name" class="form-control" value="<?php echo $user->last_name; ?>">
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<label>Username</label>
+					</td>
+					<td align="left">
+						<input type="text" name="username" class="form-control" value="<?php echo $user->username; ?>">
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<label>Email</label>
+					</td>
+					<td align="left">
+						<input type="text" name="email" class="form-control" value="<?php echo $user->email; ?>">
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<label>Password</label>
+					</td>
+					<td align="left">
+						<input type="password" id="password" name="password" class="form-control" placeholder="Leave blank if you don't want to change password">
+						<span id="result"></span>
+
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<label>Repeat Password</label>
+					</td>
+					<td align="left">
+						<input type="password" id="repeat" name="repeatPassword" class="form-control" placeholder="Leave blank if you don't want to change password">
+						<span id="confirm"></span>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<a href="profile" class="btn btn-default">Back</a>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+</div>

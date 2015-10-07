@@ -1,0 +1,51 @@
+<style>
+	.new {
+		background-color: #eee;
+		width: 440px;
+		padding: 20px;
+		border-radius: 7px;
+	}
+	.form-control {
+		width: 300px;
+	}
+	.input-group {
+		width: 300px;
+	}
+</style>
+<br></br>
+<div class="container new">
+
+	<form action="\one\Product\create" method="post" enctype="multipart/form-data">
+
+		<div align="center">
+			<h1>New Product</h1>
+			<div>
+				<label>Name</label>
+				<input type="text" name="name" class="form-control">
+			</div>
+
+			<div>
+				<label>Stock</label>
+				<input type="number" name="stock" class="form-control">
+			</div>
+
+			<div>
+				<label>Price</label>
+				<div class="input-group">
+					<span class="input-group-addon">$</span>
+					<input type="number" name="price" class="form-control">
+				</div>
+			</div>
+
+			<div class="image-form">
+				<label>Select image to upload</label>
+				<input type="file" name="photo" id="fileToUpload">
+			</div>
+
+			<br>
+		</table>
+		<br>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>
+</form>
+</div>

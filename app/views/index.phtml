@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="/one/public/css/bootstrap.css">
+	<script src="/one/public/js/jquery-2.1.4.js"></script>
+	<script src="/one/public/js/bootstrap.js"></script>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<style>
+
+		th, td {
+			padding: 7px;
+		}
+
+		.create {
+			background-color: #eee;
+			width: 500px;
+			padding: 20px;
+			border-radius: 20px;
+		}
+
+		.row{
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		.white-text {
+			color: white;
+		}
+
+		.blue-background {
+			background-image: url("/one/public/img/blue1.jpg");
+			background-size: cover;
+		}
+		.avatar {
+			width: 28px;
+			border-radius: 5px;
+		}
+
+		@media screen and (min-width:768px){
+			.navbar-brand-centered {
+				position: absolute;
+				left: 50%;
+				display: block;
+				width: 160px;
+				text-align: center;
+				background-color: #eee;
+			}
+			.navbar>.container .navbar-brand-centered, 
+			.navbar>.container-fluid .navbar-brand-centered {
+				margin-left: -80px;
+			}
+		}
+	</style>
+
+	<title>eShop</title>
+</head>
+<body class="blue-background">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
+					<span class="sr-only">Toggle navigation</span>
+				</button>
+				<div class="navbar-brand navbar-brand-centered">eShop</div>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-brand-centered">
+				<ul class="nav navbar-nav">
+					<li><?php echo $this->tag->linkTo(array("", "Home")) ?></li>
+					
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<?php if ($this->session->get("auth")) {
+						?>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<img src="<?php echo substr($user->avatar, strpos($user->avatar, "\one")); ?>" class="avatar">
+								<?php echo $this->session->get("auth")['username']; ?>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="/one/User/profile">Profile</a></li>
+								<li><a href="/one/User/edit">Edit Profile</a></li>
+								<li><a href="/one/User/changeAvatar">Change Avatar</a></li>
+								<li><a href="/one/User/cart">Cart</a></li>
+								<li><a href="/one/Session/end">Log-out</a></li>
+							</ul>
+						</li>
+						<?php
+					}
+					else { ?>
+					<li>
+						<?php
+						echo $this->tag->linkTo("User/new", "Register");?> </li>
+						<li><?php
+							echo $this->tag->linkTo("Session/index", "Log-in");
+							?>
+						</li>
+						<?php }?>
+
+
+						
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+		<?php echo $this->flash->output(); ?>
+		<?php echo $this->getContent(); ?>
+	</body>
+	</html>
