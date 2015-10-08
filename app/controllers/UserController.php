@@ -217,6 +217,16 @@ class UserController extends ControllerBase
 		//decrement each product's stock, and add purchase record data
 		foreach ($products_ids as $id) {
 			$temp = Product::findFirst($id);
+
+			//added more items to cart than in stock, so only purchase available ones
+			if ($temp->stock <= 0) {
+				$this->flash->notice("Error, some items in your cart were not successfully purchased, please check your history");
+				$user->cart = '';
+				$user->save();
+				$purchase->save();
+				return $this->response->redirect("Index");
+			}
+
 			$temp->stock--;
 			$temp->save();
 
